@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * Service layer for managing Member operations
- * Handles creation, retrieval, updates, and deletions, and assigning members to tournaments
+ * Handles creation, retrieval, and searching
  */
 @Service
 public class MemberService
