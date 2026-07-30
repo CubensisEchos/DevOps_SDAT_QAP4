@@ -7,11 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for managing member operations.
+ * Handles creating, retrieving, and searching
+ */
 @RestController
 @CrossOrigin
 public class MemberController
 {
-    @Autowired MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     @PostMapping("/members")
     public Member addNewMember(@RequestBody Member member)
