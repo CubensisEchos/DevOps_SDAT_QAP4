@@ -19,7 +19,7 @@ public class Tournament
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String Location;
+    private String location;
     private double entryFee;
     private double prizeAmount;
 
@@ -35,7 +35,7 @@ public class Tournament
     {
         this.startDate = startDate;
         this.endDate = endDate;
-        Location = location;
+        this.location = location;
         this.entryFee = entryFee;
         this.prizeAmount = prizeAmount;
     }
@@ -45,7 +45,7 @@ public class Tournament
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
-        Location = location;
+        this.location = location;
         this.entryFee = entryFee;
         this.prizeAmount = prizeAmount;
         this.participatingMembers = participatingMembers;
@@ -83,12 +83,12 @@ public class Tournament
 
     public String getLocation()
     {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location)
     {
-        Location = location;
+        this.location = location;
     }
 
     public double getEntryFee()
@@ -127,7 +127,7 @@ public class Tournament
                 "id=" + id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", Location='" + Location + '\'' +
+                ", Location='" + location + '\'' +
                 ", entryFee=" + entryFee +
                 ", prizeAmount=" + prizeAmount +
                 ", participatingMembers=" + participatingMembers +

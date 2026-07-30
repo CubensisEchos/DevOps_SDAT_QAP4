@@ -1,10 +1,12 @@
 package com.keyin.member;
 
 import com.keyin.enums.MembershipType;
+import com.keyin.tournament.Tournament;
 import com.keyin.tournament.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +51,10 @@ public class MemberService
         return memberRepository.findByMemberPhoneNumber(phoneNumber);
     }
 
-    //search by tournament start date
+    public List<Member> searchByTournamentStartDate(LocalDate startDate)
+    {
+        List<Tournament> tournaments = tournamentRepository.findByStartDate(startDate);
+
+        return tournaments.stream().flatMap(tournament -> tournament.getParticipatingMembers().stream()).toList();
+    }
 }

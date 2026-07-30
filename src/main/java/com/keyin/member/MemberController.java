@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -52,5 +53,11 @@ public class MemberController
     public List<Member> searchByPhoneNumber(@PathVariable String phoneNumber)
     {
         return memberService.searchByPhoneNumber(phoneNumber);
+    }
+
+    @GetMapping("/members/search/tournament-date/{startDate}")
+    public List<Member> searchByTournamentStartDate(@PathVariable LocalDate startDate)
+    {
+        return memberService.searchByTournamentStartDate(startDate);
     }
 }

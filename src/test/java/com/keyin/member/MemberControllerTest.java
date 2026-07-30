@@ -124,4 +124,17 @@ public class MemberControllerTest
         Assertions.assertEquals(member, response.get(0));
         verify(memberService).searchByPhoneNumber("7091235544");
     }
+
+    @Test
+    public void searchByTournamentStartDate_ReturnsApplicableMembers()
+    {
+        List<Member> members = List.of(member);
+
+        Mockito.when(memberService.searchByTournamentStartDate(LocalDate.of(2026, 8, 15))).thenReturn(members);
+        List<Member> response = memberController.searchByTournamentStartDate(LocalDate.of(2026, 8, 15));
+
+        Assertions.assertEquals(1, response.size());
+        Assertions.assertEquals(member, response.get(0));
+        verify(memberService).searchByTournamentStartDate(LocalDate.of(2026, 8, 15));
+    }
 }

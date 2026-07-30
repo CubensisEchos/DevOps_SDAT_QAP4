@@ -1,8 +1,8 @@
 package com.keyin.member;
 
 import com.keyin.enums.MembershipType;
-import com.keyin.member.Member;
-import com.keyin.member.MemberRepository;
+import com.keyin.tournament.Tournament;
+import com.keyin.tournament.TournamentRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,10 +23,14 @@ public class MemberServiceTest
     @Mock
     private MemberRepository memberRepository;
 
+    @Mock
+    private TournamentRepository tournamentRepository;
+
     @InjectMocks
     private MemberService memberService;
 
     private Member member;
+    private Tournament tournament;
 
     @BeforeEach
     void setup()
@@ -38,12 +42,20 @@ public class MemberServiceTest
                 "7091235544",
                 LocalDate.of(2026, 5, 21),
                 MembershipType.ANNUAL);
+
+        tournament = new Tournament(
+                LocalDate.of(2026, 8, 15),
+                LocalDate.of(2026, 8, 17),
+                "Test City",
+                50.00,
+                100.00 );
     }
 
     @AfterEach
     void tearDown()
     {
         member = null;
+        tournament = null;
     }
 
     @Test
@@ -124,5 +136,18 @@ public class MemberServiceTest
         Mockito.verify(memberRepository).findByMemberPhoneNumber("7091235544");
     }
 
+    @Test
+    public void searchByTournamentStartDate_ReturnsApplicableMembers()
+    {
+        tournament.getParticipatingMembers().add(member);
+        List<Tournament> tournaments = List.of(tournament);
+
+        Mockito.when(tournamentRepository.findByStartDate(LocalDate.of(2026, 8, 15))).thenReturn(tournaments);
+        List<Member> response = memberService.searchByTournamentStartDate(LocalDate.of(2026, 8, 15));
+
+        Assertions.assertEquals(1, response.size());
+        Assertions.assertEquals(member, response.get(0));
+        Mockito.verify(tournamentRepository).findByStartDate(LocalDate.of(2026, 8, 15));
+    }
 
 }
