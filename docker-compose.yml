@@ -1,0 +1,10 @@
+services:
+  tournament-api:
+    build: .
+    container_name: tournament-api
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://tournament-manager-database.cba64qk2c8ax.us-east-2.rds.amazonaws.com:3306/tournament_manager
+      DB_USERNAME: admin
+      DB_PASSWORD: Abcd23452345!
